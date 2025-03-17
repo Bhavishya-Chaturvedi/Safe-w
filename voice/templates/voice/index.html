@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,9 +132,9 @@
         <p class="tagline">A voice-activated safety app designed to keep you safe. Set up your emergency contacts, choose your safety code word, and start using the app for peace of mind.</p>
         <h1>Welcome to Sakhi</h1>
         <p class="tagline">A voice-activated safety app designed to keep you safe. With SafetyApp, you can set up emergency contacts, choose a safety code word, and start using the app to ensure your peace of mind. Our app is designed to be intuitive and easy to use, providing you with the security you need in any situation.</p>
-        <img src="Frame.png" class="image1" alt="w-safe" width="500" height="130">
-        <img src="Frame(1).png" class="image1" alt="w-safe" width="500" height="130">
-        <img src="Frame(2).png" class="image1" alt="w-safe" width="500" height="130">
+        <img src={% static "images/Frame.png" %} class="image1" alt="w-safe" width="500" height="130">
+        <img src={% static "images/Frame(1).png" %} class="image1" alt="w-safe" width="500" height="130">
+        <img src={% static "images/Frame(2).png" %} class="image1" alt="w-safe" width="500" height="130">
         <div class="container">
             <h1>Set Safety Code Word</h1>
             <div class="input-group">
