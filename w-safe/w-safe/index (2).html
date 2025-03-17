@@ -1,0 +1,397 @@
+<!-- {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Command Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #4a90e2;
+        }
+        button {
+            background-color: #4a90e2;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #357abd;
+        }
+        #status {
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .command-list {
+            margin-top: 20px;
+        }
+        .command-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .command-item p {
+            margin: 5px 0;
+        }
+        .no-records {
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Voice Command Input</h1>
+        <button id="start-record-btn">Start Recording</button>
+        <p id="status">Click the button to start recording and allow microphone access.</p>
+        <form id="voice-form" method="POST" action="{% url 'voice_input' %}">
+            {% csrf_token %}
+            <input type="hidden" name="voice_text" id="voice_text">
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="command-list">
+            <h2>Recorded Commands</h2>
+            {% if commands %}
+                {% for command in commands %}
+                    <div class="command-item">
+                        <p><strong>Command:</strong> {{ command.command_text }}</p>
+                        <p><strong>Recorded At:</strong> {{ command.timestamp }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-records">No commands recorded yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        if (!window.SpeechRecognition) {
+            document.getElementById('status').textContent = 'SpeechRecognition API is not supported in this browser.';
+            document.getElementById('start-record-btn').disabled = true;
+        } else {
+            const recognition = new SpeechRecognition();
+            const startRecordBtn = document.getElementById('start-record-btn');
+            const status = document.getElementById('status');
+            const voiceText = document.getElementById('voice_text');
+
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            startRecordBtn.addEventListener('click', () => {
+                recognition.start();
+                status.textContent = "Listening...";
+            });
+
+            recognition.addEventListener('result', (event) => {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0])
+                    .map(result => result.transcript)
+                    .join('');
+                voiceText.value = transcript;
+                status.textContent = "Voice captured: " + transcript;
+            });
+
+            recognition.addEventListener('end', () => {
+                status.textContent = "Stopped listening.";
+                recognition.stop();
+            });
+
+            recognition.addEventListener('error', (event) => {
+                status.textContent = "Error: " + event.error;
+            });
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Safety - Voice Command Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f4f9;
+            color: #333;
+        }
+        .image1{
+            margin:0% 20%;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #800080;
+        }
+        h2 {
+            color: #800080;
+            margin-top: 30px;
+            font-size: 1.8em;
+        }
+        p.tagline {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Adds space between the buttons */
+        }
+        button {
+            background-color: #e74c3c;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 1.2em;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        
+        #status {
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        /* Center the input group on the page */
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    max-width: 600px; /* Adjust the width as per your requirement */
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Enlarge the input field */
+.input-group input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* Style the eye icon */
+.input-group .eye-icon {
+    margin-left: -35px; /* Adjust the position of the icon */
+    cursor: pointer;
+    font-size: 24px; /* Enlarge the icon */
+    color: #888;
+}
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .resources {
+            margin-top: 30px;
+        }
+        .resource-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #800080;
+            color: white;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+        .footer a {
+            color: #f0f0f0;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Women's Safety App</h1>
+        <p class="tagline">Empowering women with the tools for safety and security.</p>
+         <img src="https://images.herzindagi.info/image/2023/Jan/women-safety.jpg" class="image1" alt="w-safe" width="500" height="250">
+         <p class="tagline">A voice-activated safety app designed to keep you safe. Set up your emergency contacts, choose your safety code word, and start using the app for peace of mind.</p>
+         <h1>Welcome to Sakhi</h1>
+        <p class="tagline">A voice-activated safety app designed to keep you safe. With SafetyApp, you can set up emergency contacts, choose a safety code word, and start using the app to ensure your peace of mind. Our app is designed to be intuitive and easy to use, providing you with the security you need in any situation.</p>
+         <img src ="Frame.png" class="image1" alt="w-safe" width="500" height="130">
+         <img src ="Frame(1).png" class="image1" alt="w-safe" width="500" height="130">
+         <img src ="Frame(2).png" class="image1" alt="w-safe" width="500" height="130">
+         <div class="container">
+            <h1>Set Safety Code Word</h1>
+            <div class="input-group">
+                <input type="text" placeholder="Type your code word here">
+                <span class="eye-icon">👁️</span>
+            </div>
+
+            <p class="tagline">Choose your safety code word. This word will trigger an emergency alert when spoken. Please choose something easy to remember but hard for others to guess.</p>
+            <div class="button-container">
+                <button class="save-btn">Save</button>
+                <button class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+         <div class="button-container">
+            <button id="emergency-alert-btn">Emergency Alert</button>
+            <button id="start-record-btn">Start Recording</button>
+        </div>
+
+        <p id="status">Click a button to start an action and allow microphone access.</p>
+
+        <form id="voice-form" method="POST" action="{% url 'voice_input' %}">
+            {% csrf_token %}
+            <input type="hidden" name="voice_text" id="voice_text">
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="resources">
+            <h2>Safety Resources</h2>
+            <div class="resource-item">
+                <p><strong>Tips:</strong> Always share your location with a trusted contact when traveling alone.</p>
+            </div>
+            <div class="resource-item">
+                <p><strong>Hotline:</strong> Call 1-800-123-4567 for immediate assistance.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Women's Safety App. All rights reserved.</p>
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Support</a>
+        </div>
+    </div>
+
+    <script>
+        // JS for handling voice commands and microphone permissions
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        const recognition = new SpeechRecognition();
+        const startRecordBtn = document.getElementById('start-record-btn');
+        const emergencyAlertBtn = document.getElementById('emergency-alert-btn');
+        const status = document.getElementById('status');
+        const voiceText = document.getElementById('voice_text');
+
+        recognition.interimResults = true;
+        recognition.lang = 'en-US';
+
+        let micAccessGranted = false;
+
+        // Request microphone permission when the page loads
+        const getMicrophoneAccess = () => {
+            return navigator.mediaDevices.getUserMedia({ audio: true })
+                .then((stream) => {
+                    micAccessGranted = true;
+                    status.textContent = "Microphone access granted. You can now start recording.";
+                })
+                .catch((error) => {
+                    micAccessGranted = false;
+                    status.textContent = "Microphone access denied. Please allow microphone access to proceed.";
+                });
+        };
+
+        // Automatically request microphone permission when page loads
+        window.onload = () => {
+            getMicrophoneAccess();
+        };
+
+        // Start recording when button is clicked, if microphone access was granted
+        startRecordBtn.addEventListener('click', () => {
+            if (micAccessGranted) {
+                recognition.start();
+                status.textContent = "Listening...";
+            } else {
+                status.textContent = "Microphone access has not been granted.";
+            }
+        });
+
+        recognition.addEventListener('result', (event) => {
+            const transcript = Array.from(event.results)
+                .map(result => result[0])
+                .map(result => result.transcript)
+                .join('');
+            voiceText.value = transcript;
+            status.textContent = "Voice captured: " + transcript;
+        });
+
+        recognition.addEventListener('end', () => {
+            status.textContent = "Stopped listening.";
+            recognition.stop();
+        });
+
+        recognition.addEventListener('error', (event) => {
+            status.textContent = "Error: " + event.error;
+        });
+
+        // Emergency alert button
+        emergencyAlertBtn.addEventListener('click', () => {
+            alert("Emergency Alert Sent!");
+            status.textContent = "Emergency alert activated.";
+        });
+    </script>
+</body>
+</html>
